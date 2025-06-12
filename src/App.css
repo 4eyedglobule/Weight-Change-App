@@ -1,0 +1,18 @@
+.box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 100vh;
+}
+.title{
+    font-family: Raleway;
+    text-align: center;
+    color: black;
+    font-size: 50px;
+}
+.disclaimer {
+    font-family: Raleway;
+    text-align: center;
+    color: black;
+    font-size: 10px;
+}
