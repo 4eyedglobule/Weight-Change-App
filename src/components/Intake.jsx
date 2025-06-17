@@ -3,7 +3,7 @@ import { useState } from "react";
 import "./Intake.css";
 import Button from "./Button";
 
-const Intake = () => {
+const Intake = ({ onSendCaloriesAdded }) => {
   const [caloriesAdded, setCaloriesAdded] = useState(0);
   const [consumed, setConsumed] = useState("");
   const [items, setItems] = useState([]);
@@ -16,6 +16,7 @@ const Intake = () => {
     setCaloriesAdded(e.target.value);
   };
   const calculateCalories = () => {
+    onSendCaloriesAdded(totalCalories + Number(caloriesAdded));
     setTotalCalories((totalCalories) => totalCalories + Number(caloriesAdded));
     setItems((items) => [...items, consumed]);
   };
@@ -30,7 +31,6 @@ const Intake = () => {
           <input
             type="text"
             placeholder="Item Consumed"
-            value={consumed}
             onChange={addConsumed}
           />
         </div>
@@ -38,15 +38,14 @@ const Intake = () => {
           <input
             type="Number"
             placeholder="Calories Gained"
-            value={caloriesAdded}
             onChange={handleCalInput}
           />
         </div>
-        <Button onClick={calculateCalories}>Add</Button>
+        <Button onClick={calculateCalories} onDisable={consumed.length < 1}>
+          Add
+        </Button>
       </div>
-      <div className="calories_gained">
-        Items Consumed: {items}
-      </div>
+      <div className="calories_gained">Items Consumed: {items.join(", ")}</div>
       <div className="calories_gained">
         Total Calories Gained: {totalCalories}
       </div>

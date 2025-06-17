@@ -3,7 +3,7 @@
   place-self: center;
   padding: 40px;
   border-radius: 10px;
-  background: #ff7300;
+  background: linear-gradient(to right, #6fa1ff, #ffffff);;
   display:flex;
   flex-direction: column;
   align-items: center;

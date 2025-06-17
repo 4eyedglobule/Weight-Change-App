@@ -3,7 +3,7 @@ import { useState } from "react";
 import "./Loss.css";
 import Button from "./Button";
 
-const Loss = () => {
+const Loss = ({ onSendCaloriesLost }) => {
   const [caloriesLost, setCaloriesLost] = useState(0);
   const [activity, setActivity] = useState("");
   const [items, setItems] = useState([]);
@@ -16,6 +16,7 @@ const Loss = () => {
     setCaloriesLost(e.target.value);
   };
   const calculateCalories = () => {
+    onSendCaloriesLost(totalLost + Number(caloriesLost));
     setItems((items) => [...items, activity]);
     setTotalLost((totalLost) => totalLost + Number(caloriesLost));
   };
@@ -32,7 +33,6 @@ const Loss = () => {
           <input
             type="text"
             placeholder="Activity Performed"
-            value={activity}
             onChange={addActivity}
           />
         </div>
@@ -40,14 +40,13 @@ const Loss = () => {
           <input
             type="Number"
             placeholder="Calories Lost"
-            value={caloriesLost}
             onChange={handleCalLoss}
           />
         </div>
-        <Button onClick={calculateCalories}>Add</Button>
+        <Button onClick={calculateCalories} onDisable={activity.length<1}>Add</Button>
       </div>
       <div className="calories_lost">
-        Activities Performed: {items}
+        Activities Performed: {items.join(', ')}
       </div>
       <div className="calories_lost">Total Calories Lost: {totalLost}</div>
       <Button onClick={resetCalories}>Reset</Button>
