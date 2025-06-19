@@ -3,29 +3,33 @@ import { useState } from "react";
 import "./Estimator.css";
 import Button from "./Button";
 
-const Estimator = ( onSendInfo ) => {
+const Estimator = ({ onSendHeight, onSendAge, onSendWeight }) => {
   const [height, setHeight] = useState(0);
   const [age, setAge] = useState(0);
   const [weight, setWeight] = useState(0);
 
   const changeHeight = (e) => {
     setHeight(e.target.value);
-    onSendInfo([height,age,weight]);
+    onSendHeight(e.target.value);
   };
   const changeAge = (e) => {
     setAge(e.target.value);
-    onSendInfo([height,age,weight]);
+    onSendAge(e.target.value);
   };
   const changeWeight = (e) => {
     setWeight(e.target.value);
-    onSendInfo([height,age,weight]);
+    onSendWeight(e.target.value);
   };
   return (
     <div className="estimator_box">
       <div className="title_text">OTHER INFORMATION</div>
       <div className="generic_text">Height: {height}</div>
       <div className="search-bar">
-        <input type="text" placeholder="Enter height" onChange={changeHeight} />
+        <input
+          type="number"
+          placeholder="Enter height"
+          onChange={changeHeight}
+        />
       </div>
       <div className="generic_text">Age: {age}</div>
       <div className="search-bar">

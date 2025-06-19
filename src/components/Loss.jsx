@@ -21,8 +21,8 @@ const Loss = ({ onSendCaloriesLost }) => {
     setTotalLost((totalLost) => totalLost + Number(caloriesLost));
   };
   const resetCalories = () => {
-    setTotalLost(0);
     setItems([]);
+    setTotalLost(0);
   };
 
   return (
@@ -43,10 +43,12 @@ const Loss = ({ onSendCaloriesLost }) => {
             onChange={handleCalLoss}
           />
         </div>
-        <Button onClick={calculateCalories} onDisable={activity.length<1}>Add</Button>
+        <Button onClick={calculateCalories} onDisable={activity.length < 1 || caloriesLost < 1}>
+          Add
+        </Button>
       </div>
       <div className="calories_lost">
-        Activities Performed: {items.join(', ')}
+        Activities Performed: {items.join(", ")}
       </div>
       <div className="calories_lost">Total Calories Lost: {totalLost}</div>
       <Button onClick={resetCalories}>Reset</Button>

@@ -21,6 +21,7 @@ const Intake = ({ onSendCaloriesAdded }) => {
     setItems((items) => [...items, consumed]);
   };
   const resetCalories = () => {
+    setItems([]);
     setTotalCalories(0);
   };
   return (
@@ -41,7 +42,7 @@ const Intake = ({ onSendCaloriesAdded }) => {
             onChange={handleCalInput}
           />
         </div>
-        <Button onClick={calculateCalories} onDisable={consumed.length < 1}>
+        <Button onClick={calculateCalories} onDisable={consumed.length < 1 || caloriesAdded < 1}>
           Add
         </Button>
       </div>
