@@ -21,6 +21,7 @@ const Loss = ({ onSendCaloriesLost }) => {
     setTotalLost((totalLost) => totalLost + Number(caloriesLost));
   };
   const resetCalories = () => {
+    onSendCaloriesLost(0);
     setItems([]);
     setTotalLost(0);
   };

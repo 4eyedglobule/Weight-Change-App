@@ -23,6 +23,12 @@ ChartJS.register(
 const Linegraph = ({ inputData }) => {
   const options = {
     maintainAspectRatio: false,
+    scales: {
+      y: {
+        min: 0,
+        suggestedMax: 400, 
+      },
+    },
   };
   return <Line options={options} data={inputData} />;
 };

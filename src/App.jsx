@@ -12,16 +12,20 @@ function App() {
   const [height, setHeight] = useState(0);
   const [weight, setWeight] = useState(0);
   const [age, setAge] = useState(0);
-  const [weightLoss, setWeightLoss] = useState(0);
+  const [sexConst, setSexConst] = useState(0);
+  const [weightChange, setWeightChange] = useState(0);//Total weight change
+  const [newWeight, setNewWeight] = useState(0);
+  
+  const [newWeightVal, setNewWeightVal] = useState(0);//New weight value added to chart (without calculations)
   const [chartLabels, setChartLabels] = useState([]); //e.g. [Firstlabel,secondlabel,thirdlabel]
-  const [chartWeightData, setchartWeightData] = useState([]); //e.g. [300,400,100,200]
+  const [chartWeightData, setChartWeightData] = useState([]); //e.g. [300,400,100,200]
   const chartInputData = {
     labels: chartLabels,
     datasets: [
       {
-        label: "Weight",
+        label: "Weight (kg)",
         data: chartWeightData,
-        borderColor: "rgb(1,0,0)",
+        borderColor: "rgb(0, 26, 255)",
       },
     ],
   };
@@ -41,36 +45,44 @@ function App() {
   const handleAge = (value) => {
     setAge(value);
   };
-  //Calculates total weight loss and sets weightLoss variable to it
-  const calculateWeightLoss = () => {
-    alert(
-      "Cal Added: " +
-        totalCalAdded +
-        ", Cal Lost: " +
-        totalCalLost +
-        ", Height, Age, Weight: " +
-        height +
-        ", " +
-        age +
-        ", " +
-        weight
-    );
+  const handleSexConst = (value) => {
+    setSexConst(value);
+  }
+  const handleNewWeightValInput = (e) => {
+    setNewWeightVal(Number(e.target.value));
   };
-  //Adds weightLoss variable as data on chart, should add an element to both data and label
-  const addToChart = () => {
-    alert("Should add total weight loss to chart");
+  //Calculates total weight loss and sets weightChange variable to it
+  const calculateWeightChange = () => {
+    setWeightChange(parseFloat((totalCalAdded-((10*weight+6.25*height-5*age+sexConst)+totalCalLost))/7700).toFixed(2));
+    setNewWeight(parseFloat((Number(weight)+parseFloat((totalCalAdded-((10*weight+6.25*height-5*age+sexConst)+totalCalLost))/7700)).toFixed(2)));
+  };
+  //Adds calculated weight change to chart
+  const addCalcToChart = () => {
+    setChartLabels((chartLabels) => [
+      ...chartLabels,
+      `Weight ${chartLabels.length + 1}`,
+    ]);
+    setChartWeightData((chartWeightData) => [...chartWeightData, newWeight]);
+  }
+    //Adds weightChange variable as data on chart, should add an element to both data and label
+  const addInputToChart = () => {
+    setChartLabels((chartLabels) => [
+      ...chartLabels,
+      `Weight ${chartLabels.length + 1}`,
+    ]);
+    setChartWeightData((chartWeightData) => [...chartWeightData, newWeightVal]);
   };
   //Clears chart data to empty chart
   const resetChart = () => {
     setChartLabels([]);
-    setchartWeightData([]);
+    setChartWeightData([]);
   };
   document.body.style.background = "rgb(218, 218, 218)";
   return (
     <div className="box">
-      <div className="title">DAILY WEIGHT LOSS CALCULATOR</div>
+      <div className="title">DAILY WEIGHT CHANGE CALCULATOR</div>
       <div className="wrapper" style={{ display: "flex" }}>
-        <div>
+        <div className="input_box">
           <div style={{ display: "flex", justifyContent: "center" }}>
             <Intake onSendCaloriesAdded={handleCalAdded} />
           </div>
@@ -82,31 +94,46 @@ function App() {
               onSendHeight={handleHeight}
               onSendAge={handleAge}
               onSendWeight={handleWeight}
+              onSendSexConst={handleSexConst}
             />
           </div>
           <div
             className="calc_button_box"
-            style={{ display: "flex", justifyContent: "center", flex: "1" }}
+            style={{ display: "flex", justifyContent: "center" }}
           >
             <Button
-              onClick={calculateWeightLoss}
-              onDisable={height < 1 || weight < 1 || age < 1}
+              onClick={calculateWeightChange}
+              onDisable={height < 1 || weight < 1 || age < 1 || sexConst == 0}
             >
-              CALCULATE WEIGHT LOSS
+              CALCULATE WEIGHT CHANGE
             </Button>
-            <Button onClick={addToChart} onDisable={weightLoss == 0}>
+            <Button onClick={addCalcToChart} onDisable={weightChange == 0}>
               ADD TO CHART
             </Button>
+            <div>Total weight change: {weightChange} kg difference</div>
+            <div>New weight: {newWeight} kg</div>
           </div>
         </div>
         <div className="chart_box">
           <Linegraph inputData={chartInputData} />
-          <Button
-            onClick={addToChart}
-            onDisable={chartLabels.length < 1 || chartWeightData.length < 1}
-          >
-            RESET CHART
-          </Button>
+          <div style={{ display: "flex" }}>
+            <Button onClick={addInputToChart} onDisable={newWeightVal < 1}>
+              ADD WEIGHT
+            </Button>
+            <div className="search-bar">
+              <input
+                type="Number"
+                placeholder="Input weight (kg)"
+                onChange={handleNewWeightValInput}
+              />
+            </div>
+            <Button
+              onClick={resetChart}
+              onDisable={chartLabels.length < 1 || chartWeightData.length < 1}
+            >
+              RESET CHART
+            </Button>
+          </div>
         </div>
       </div>
       <div className="disclaimer">

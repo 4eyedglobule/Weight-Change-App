@@ -21,6 +21,7 @@ const Intake = ({ onSendCaloriesAdded }) => {
     setItems((items) => [...items, consumed]);
   };
   const resetCalories = () => {
+    onSendCaloriesAdded(0);
     setItems([]);
     setTotalCalories(0);
   };
