@@ -24,9 +24,29 @@ const Linegraph = ({ inputData }) => {
   const options = {
     maintainAspectRatio: false,
     scales: {
+      x: {
+        grid: {
+          color: "rgb(255, 255, 255)",
+        },
+        border: {
+          color: "rgb(255, 255, 255)",
+        },
+        ticks: {
+          color: "rgb(255, 255, 255)",
+        },
+      },
       y: {
+        grid: {
+          color: "rgb(255, 255, 255)",
+        },
+        border: {
+          color: "rgb(255, 255, 255)",
+        },
+        ticks: {
+          color: "rgb(255, 255, 255)",
+        },
         min: 0,
-        suggestedMax: 400, 
+        suggestedMax: 400,
       },
     },
   };

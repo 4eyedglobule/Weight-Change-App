@@ -27,7 +27,7 @@ const Intake = ({ onSendCaloriesAdded }) => {
   };
   return (
     <div className="calorie_intake_box">
-      <div className="intake_text">Calorie Intake Calculator</div>
+      <div className="intake_text">Calorie Intake</div>
       <div style={{ display: "flex" }}>
         <div className="search-bar">
           <input

@@ -28,7 +28,7 @@ const Loss = ({ onSendCaloriesLost }) => {
 
   return (
     <div className="calorie_loss_box">
-      <div className="loss_text">Calorie Loss Calculator</div>
+      <div className="loss_text">Calorie Loss</div>
       <div style={{ display: "flex" }}>
         <div className="search-bar">
           <input

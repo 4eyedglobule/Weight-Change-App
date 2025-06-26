@@ -1,13 +1,14 @@
 import React from "react";
+import "./Button.css"
 
-const Button = ({ onClick, onDisable, children }) => {
+const Button = ({ onClick, onDisable, children, textSize="20px" }) => {
   return (
     <button
       type="button"
-      style={{ fontFamily: "Raleway", fontSize: "30px", borderRadius: "40px" }}
+      style={{ fontFamily: "Raleway", fontSize: textSize, borderRadius: "30px" }}
       disabled={onDisable}
       className={
-        "btn d-flex btn-lg btn-outline-dark justify-content-center font-family-Raleway"
+        "btn d-flex btn-outline-light justify-content-center button_disabled_override"
       }
       onClick={onClick}
     >

@@ -1,9 +1,9 @@
 import React from "react";
 import { useState } from "react";
-import "./Estimator.css";
+import "./OtherInfo.css";
 import Button from "./Button";
 
-const Estimator = ({ onSendHeight, onSendAge, onSendWeight, onSendSexConst }) => {
+const OtherInfo = ({ onSendHeight, onSendAge, onSendWeight, onSendSexConst }) => {
   const [height, setHeight] = useState(0);
   const [age, setAge] = useState(0);
   const [weight, setWeight] = useState(0);
@@ -27,7 +27,7 @@ const Estimator = ({ onSendHeight, onSendAge, onSendWeight, onSendSexConst }) =>
   }
   return (
     <div className="estimator_box">
-      <div className="title_text">OTHER INFORMATION</div>
+      <div className="title_text">Other Information</div>
       <div style={{ display: "flex" }}>
             <Button onClick={() => changeSex(5)} onDisable={sexConst==5}>
               MALE
@@ -63,4 +63,4 @@ const Estimator = ({ onSendHeight, onSendAge, onSendWeight, onSendSexConst }) =>
   );
 };
 
-export default Estimator;
+export default OtherInfo;
