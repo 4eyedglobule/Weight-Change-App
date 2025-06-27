@@ -9,7 +9,7 @@ function App() {
   const [newChartWeight, setNewChartWeight] = useState(0); //New weight value added to chart (without calculations)
   const [chartLabels, setChartLabels] = useState([]); //e.g. [Firstlabel,secondlabel,thirdlabel]
   const [chartWeightData, setChartWeightData] = useState([]); //e.g. [300,400,100,200]
-  const fileExplorerRef = useRef(null);
+  const fileExplorerRef = useRef(null); //Creates ref for file explorer input; this is because the file explorer input is invisible so a ref is needed to trigger it
   
   const chartInputData = {
     labels: chartLabels,
@@ -22,14 +22,14 @@ function App() {
     ],
   };
 
-  const handleNewChartWeight = (e) => {
-    setNewChartWeight(Number(e.target.value));
+  const handleNewChartWeight = (event) => {
+    setNewChartWeight(Number(event.target.value));
   };
   //Adds calculated weight change to chart
   const addCalcToChart = (newVal) => {
     setChartLabels((chartLabels) => [
       ...chartLabels,
-      `Weight ${chartLabels.length + 1}`,
+      newVal.toString(),
     ]);
     setChartWeightData((chartWeightData) => [...chartWeightData, newVal]);
   };
@@ -37,7 +37,7 @@ function App() {
   const addInputToChart = () => {
     setChartLabels((chartLabels) => [
       ...chartLabels,
-      `Weight ${chartLabels.length + 1}`,
+      newChartWeight.toString(),
     ]);
     setChartWeightData((chartWeightData) => [...chartWeightData, newChartWeight]);
   };
@@ -46,9 +46,9 @@ function App() {
     setChartLabels([]);
     setChartWeightData([]);
   };
-  //Exports chart weight data as a text file
+  //Exports chart weight data as a plain text file
   const exportWeightData = (weightData) => {
-    const fileText = weightData.join("\n");
+    const fileText = weightData.join("\n"); //Every data value is its own line; allows for easier importing
     const blob = new Blob([fileText], { type: "text/plain" });
     const url = URL.createObjectURL(blob);
     const link = document.createElement("a");
@@ -60,7 +60,7 @@ function App() {
   };
   //Activates input of type file. Used by button to trigger it. The input is hidden to better improve aesthetics and readability
   const activateFileExplorer = () => {
-    fileExplorerRef.current.click();
+    fileExplorerRef.current.click(); //Triggers file explorer input through reference
   };
   //Imports a txt file and uses it for chart data
   const importWeightData = (e) => {
@@ -69,17 +69,16 @@ function App() {
     if (file) {
       const reader = new FileReader();
       reader.onload = (e) => {
-        const textArr = e.target.result.split("\n");
-        const numArray = textArr.map(txt => Number(txt.trim()));
-        alert(numArray);
+        const textArr = e.target.result.split("\n"); //Divides elements by newlines
+        const numArray = textArr.map(txt => Number(txt.trim())); //Trims whitespace and converts values to numbers
         setChartLabels((chartLabels) => [
           ...chartLabels,
           ...numArray.map(num=>num.toString()),
         ]);
         setChartWeightData((chartWeightData) => [...chartWeightData, ...numArray]);
       }
+      reader.readAsText(file);
     };
-    reader.readAsText(file);
   };
   document.body.style.background = "rgb(0, 24, 92)";
   return (
@@ -136,7 +135,7 @@ function App() {
           </div>
         </div>
       </div>
-      <div className="disclaimer">
+      <div className="disclaimer_text">
         THIS APPLICATION IS NOT A COMPLETE AND TOTAL GUIDELINE FOR WEIGHT LOSS.
         MANY FACTORS ARE NOT INCLUDED, SUCH AS FOOD TYPE EATEN, METABOLISM, ETC.
         BE SURE TO CONSULT OTHER SOURCES OF INFORMATION.

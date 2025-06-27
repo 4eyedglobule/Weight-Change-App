@@ -2,6 +2,7 @@ import React from "react";
 import { useState } from "react";
 import "./OtherInfo.css";
 import Button from "./Button";
+//Component which is essentially a group of inputs for other information other than calories: height, age, weight, and sex
 
 const OtherInfo = ({ onSendHeight, onSendAge, onSendWeight, onSendSexConst }) => {
   const [height, setHeight] = useState(0);
@@ -9,19 +10,19 @@ const OtherInfo = ({ onSendHeight, onSendAge, onSendWeight, onSendSexConst }) =>
   const [weight, setWeight] = useState(0);
   const [sexConst, setSexConst] = useState(0);
 
-  const changeHeight = (e) => {
-    setHeight(e.target.value);
-    onSendHeight(e.target.value);
+  const changeHeight = (event) => {
+    setHeight(event.target.value);
+    onSendHeight(event.target.value);
   };
-  const changeAge = (e) => {
-    setAge(e.target.value);
-    onSendAge(e.target.value);
+  const changeAge = (event) => {
+    setAge(event.target.value);
+    onSendAge(event.target.value);
   };
-  const changeWeight = (e) => {
-    setWeight(e.target.value);
-    onSendWeight(e.target.value);
+  const changeWeight = (event) => {
+    setWeight(event.target.value);
+    onSendWeight(event.target.value);
   };
-  const changeSex = (value) => {
+  const changeSexConst = (value) => {
     setSexConst(value);
     onSendSexConst(value);
   }
@@ -29,11 +30,11 @@ const OtherInfo = ({ onSendHeight, onSendAge, onSendWeight, onSendSexConst }) =>
     <div className="estimator_box">
       <div className="title_text">Other Information</div>
       <div style={{ display: "flex" }}>
-            <Button onClick={() => changeSex(5)} onDisable={sexConst==5}>
+            <Button onClick={() => changeSexConst(5)} onDisable={sexConst==5}>
               MALE
             </Button>
             <Button
-              onClick={() => changeSex(-161)}
+              onClick={() => changeSexConst(-161)}
               onDisable={sexConst==-161}
             >
               FEMALE

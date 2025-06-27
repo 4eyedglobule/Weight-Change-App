@@ -1,4 +1,4 @@
-.input_box {
+.input_box { /*Covers entire component*/
     padding: 25px;
     background: linear-gradient(to bottom,#0059ff,#181cff);
     border-radius: 30px;
@@ -7,10 +7,9 @@
     display: flex;
     justify-content: center;
 }
-.calc_button_box{
+.calc_button_box{ /*Covers calculation buttons and text on bottom of component*/
     font-family: Raleway;
     text-align: center;
-    color: rgb(255, 255, 255);
     font-size: 20px;
     place-self: center;
     display:flex;

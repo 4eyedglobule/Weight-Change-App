@@ -1,20 +1,20 @@
 import { useState } from "react";
-import { useRef } from "react";
 import Intake from "./Intake";
 import Loss from "./Loss";
 import OtherInfo from "./OtherInfo";
 import Button from "./Button";
 import "./Calculator.css";
+//The component that actually calculates weight change. Integrates calorie intake and loss components as well as otherinfo input component into one big component.
 
 const Calculator = ({ getNewWeight }) => {
-  const [totalCalAdded, setTotalCalAdded] = useState(0);
-  const [totalCalLost, setTotalCalLost] = useState(0);
-  const [height, setHeight] = useState(0);
-  const [weight, setWeight] = useState(0);
-  const [age, setAge] = useState(0);
-  const [sexConst, setSexConst] = useState(0);
+  const [totalCalAdded, setTotalCalAdded] = useState(0); //Keeps track of added calories
+  const [totalCalLost, setTotalCalLost] = useState(0); //Keeps track of lost calories
+  const [height, setHeight] = useState(0); //Keeps track of user height
+  const [weight, setWeight] = useState(0); //Keeps track of user current weight
+  const [age, setAge] = useState(0); //Keeps track of user's age
+  const [sexConst, setSexConst] = useState(0); //Keeps track of a constant affected by whether the user is male or female. This constant affects the weight change equation and is either 5 or 161-
   const [weightChange, setWeightChange] = useState(0); //Total weight change
-  const [newWeight, setNewWeight] = useState(0);
+  const [newWeight, setNewWeight] = useState(0); //New weight - calculated by adding weight change to user's current weight
 
   const handleTotalAdded = (value) => {
     setTotalCalAdded(value);
@@ -34,9 +34,7 @@ const Calculator = ({ getNewWeight }) => {
   const handleSexConst = (value) => {
     setSexConst(value);
   };
-  const handleNewWeightValInput = (e) => {
-    setNewWeightVal(Number(e.target.value));
-  };
+
   //Calculates total weight loss and sets weightChange variable to it
   const calculateWeightChange = () => {
     setWeightChange(
@@ -44,7 +42,7 @@ const Calculator = ({ getNewWeight }) => {
         (totalCalAdded -
           (10 * weight + 6.25 * height - 5 * age + sexConst + totalCalLost)) /
           7700
-      ).toFixed(2)
+      ).toFixed(2) //Rounds number to 2 decimal points to avoid a bunch of decimals in result
     );
     setNewWeight(
       parseFloat(
@@ -59,7 +57,7 @@ const Calculator = ({ getNewWeight }) => {
                 totalCalLost)) /
               7700
           )
-        ).toFixed(2)
+        ).toFixed(2) //Rounds number to 2 decimal points to avoid a bunch of decimals in result
       )
     );
   };

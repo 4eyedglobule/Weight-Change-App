@@ -1,5 +1,6 @@
 import React from "react";
 import "./Button.css"
+//Semi-modular button component. Has parameters for calling a function when clicked, disabling, displayed text, and changing text size.
 
 const Button = ({ onClick, onDisable, children, textSize="20px" }) => {
   return (

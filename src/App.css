@@ -1,10 +1,10 @@
-.box {
+.box { /*Covers entire app*/
     display: flex;
     flex-direction: column;
     justify-content: center;
     min-height: 100vh;
 }
-.input_box {
+.input_box { /*Covers what is essentially the calculator component*/
     padding: 25px;
     background: linear-gradient(to bottom,#0059ff,#181cff);
     border-radius: 30px;
@@ -19,7 +19,7 @@
     color: rgb(255, 255, 255);
     font-size: 50px;
 }
-.disclaimer {
+.disclaimer_text {
     font-family: Raleway;
     text-align: center;
     color: rgb(255, 255, 255);

@@ -1,11 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
-.calorie_loss_box{
+.calorie_loss_box{ /*Covers entire component*/
   place-self: center;
   display:flex;
   flex-direction: column;
   align-items: center;
 }
-.loss_text{
+.title_text{ /*Component title*/
   font-family: Raleway;
   color: rgb(255, 255, 255);
   font-size: 30px;
@@ -20,7 +20,7 @@
     background-color: #ffffff;
     font-size: 18px;
 }
-.calories_lost{
+.generic_text{
   font-family: Raleway;
   color: rgb(252, 252, 252);
   font-size: 20px;

@@ -1,11 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
-.estimator_box{
+.estimator_box{ /*Covers entire component*/
   place-self: center;
   display:flex;
   flex-direction: column;
   align-items: center;
 }
-.title_text{
+.title_text{ /*Component title*/
     font-family: Raleway;
     color: rgb(255, 255, 255);
     font-size: 30px;
