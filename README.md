@@ -2,6 +2,7 @@
 
 An application made using React.js and Vite.
 Requires Bootstrap and Chart.js libraries
+https://4eyedglobule.github.io/Weight-Change-App/
 
 ## Features
 
